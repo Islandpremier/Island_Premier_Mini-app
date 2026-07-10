@@ -8,6 +8,7 @@ type Product = {
   name: string;
   description: string;
   image_url: string;
+  video_url: string;
   price_list: string;
 };
 
@@ -233,14 +234,31 @@ Totale: €${total}
                 key={product.id}
                 className="bg-zinc-900 rounded-2xl overflow-hidden border border-yellow-500/20"
               >
-                {product.image_url && (
-                  <img
-                    src={product.image_url}
-                    alt={product.name}
-                    className="w-full h-64 object-cover"
-                  />
-                )}
-
+     {product.video_url ? (
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    controls={false}
+    className="w-full h-[320px] object-cover bg-black"
+  >
+    <source
+      src={product.video_url}
+      type="video/mp4"
+    />
+  </video>
+) : product.image_url ? (
+  <img
+    src={product.image_url}
+    alt={product.name}
+    className="w-full h-[320px] object-cover"
+  />
+) : (
+  <div className="w-full h-[320px] flex items-center justify-center bg-zinc-800 text-zinc-500">
+    Nessuna anteprima
+  </div>
+)}
                 <div className="p-5">
                   <h2 className="text-xl font-bold text-yellow-500">
                     {product.name}
@@ -280,7 +298,7 @@ Totale: €${total}
                     Aggiungi al carrello
                   </button>
                 </div>
-              </div>
+                </div>
             ))}
           </div>
         </div>
