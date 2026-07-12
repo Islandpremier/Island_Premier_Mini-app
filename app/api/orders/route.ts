@@ -9,13 +9,7 @@ const supabase = createClient(
 export async function GET() {
   const { data, error } = await supabase
     .from("orders")
-    .select(`
-      *,
-      products:order_products(
-        *,
-        product:products(*)
-      )
-    `)
+    .select("*")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -24,7 +18,9 @@ export async function GET() {
         success: false,
         error: error.message,
       },
-      { status: 500 }
+      {
+        status: 500,
+      }
     );
   }
 

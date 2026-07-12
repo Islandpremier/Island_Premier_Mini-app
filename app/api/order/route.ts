@@ -12,33 +12,37 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const {
-      customerName,
-      phoneNumber,
-      city,
-      shippingMethod,
-      selectedSlot,
-      street,
-      cap,
-      province,
-      cart,
-      total,
-    } = body;
+  customerName,
+  phoneNumber,
+  city,
+  shippingMethod,
+  selectedSlot,
+  street,
+  cap,
+  province,
+  cart,
+  total,
+  telegramId,
+  telegramUsername,
+} = body;
 
-    const { data, error } = await supabase
-      .from("orders")
-      .insert({
-        customer_name: customerName,
-        phone_number: phoneNumber,
-        city,
-        shipping_method: shippingMethod,
-        preferred_time_slot: selectedSlot,
-        street,
-        cap,
-        province,
-        products: cart,
-        total,
-        status: "pending",
-      })
+   const { data, error } = await supabase
+  .from("orders")
+  .insert({
+    customer_name: customerName,
+    phone_number: phoneNumber,
+    city,
+    shipping_method: shippingMethod,
+    preferred_time_slot: selectedSlot,
+    street,
+    cap,
+    province,
+    products: cart,
+    total,
+    telegram_id: telegramId,
+    telegram_username: telegramUsername,
+    status: "pending",
+  })
       .select()
       .single();
 

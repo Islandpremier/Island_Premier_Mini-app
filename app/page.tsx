@@ -1,26 +1,27 @@
+import Navbar from "./components/Navbar";
+import SplashScreen from "./components/SplashScreen";
+import Hero from "./components/Hero";
+import Features from "./components/Features";
+import Footer from "./components/Footer";
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6">
-      <img
-        src="/Logo.png"
-        alt="Island Premier"
-        className="w-64 mb-8 rounded-xl"
-      />
+    <SplashScreen>
 
-      <h1 className="text-5xl font-bold text-yellow-500 text-center">
-        ISLAND PREMIER
-      </h1>
+      <Navbar />
 
-      <p className="text-gray-300 text-center mt-4 max-w-xl">
-        Catalogo premium con ordini tramite Telegram.
-      </p>
+      <main className="min-h-screen bg-black text-white overflow-x-hidden">
 
-      <a
-        href="/catalogo"
-        className="mt-8 bg-yellow-500 text-black px-6 py-3 rounded-xl font-semibold"
-      >
-        Entra nel Catalogo
-      </a>
-    </main>
+        <Hero />
+
+        <section className="mx-auto max-w-7xl px-6 py-20">
+          <Features />
+        </section>
+
+        <Footer />
+
+      </main>
+
+    </SplashScreen>
   );
 }
