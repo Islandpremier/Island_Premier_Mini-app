@@ -12,58 +12,58 @@ export default function RegolamentoPage() {
           ← Torna alla Home
         </Link>
 
-        <h1 className="text-4xl font-bold text-yellow-400 mb-10">
-          Regolamento
+        <h1 className="text-4xl font-bold text-yellow-400 mb-3">
+          📜 Regolamento
         </h1>
 
-        <div className="space-y-8">
+        <p className="text-gray-400 mb-10">
+          Prima di inoltrare qualsiasi richiesta è obbligatorio prendere visione
+          delle seguenti condizioni.
+        </p>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-2">Verifica</h2>
-            <p className="text-gray-300">
-              L'utilizzo del servizio è consentito esclusivamente agli utenti verificati.
-            </p>
-          </section>
+        <div className="space-y-5">
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-2">Meet-Up</h2>
-            <p className="text-gray-300">
-              Gli incontri vengono concordati solo dopo conferma dell'ordine.
-            </p>
-          </section>
+          <div className="rounded-xl border border-yellow-500/20 bg-zinc-900/40 p-5">
+            🔒 Le richieste vengono prese in considerazione esclusivamente da utenti verificati.
+          </div>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-2">Pagamento</h2>
-            <p className="text-gray-300">
-              Le modalità di pagamento vengono comunicate esclusivamente durante la conferma dell'ordine.
-            </p>
-          </section>
+          <div className="rounded-xl border border-yellow-500/20 bg-zinc-900/40 p-5">
+            🔒 Le richieste provenienti da utenti non verificati non verranno valutate.
+          </div>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-2">Comportamento</h2>
-            <p className="text-gray-300">
-              Qualsiasi comportamento scorretto comporterà l'interruzione del servizio.
-            </p>
-          </section>
+          <div className="rounded-xl border border-yellow-500/20 bg-zinc-900/40 p-5">
+            👤 Eventuali incontri potranno avvenire esclusivamente con la persona che ha completato la verifica.
+          </div>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-2">Foto e Video</h2>
-            <p className="text-gray-300">
-              Le immagini presenti hanno solo scopo illustrativo e possono differire dal prodotto disponibile.
-            </p>
-          </section>
+          <div className="rounded-xl border border-yellow-500/20 bg-zinc-900/40 p-5">
+            🚫 Non è consentita la presenza di accompagnatori o terze persone non autorizzate.
+          </div>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-2">Privacy</h2>
-            <p className="text-gray-300">
-              I dati forniti vengono utilizzati esclusivamente per la gestione dell'ordine.
-            </p>
-          </section>
+          <div className="rounded-xl border border-yellow-500/20 bg-zinc-900/40 p-5">
+            ⏰ Si richiedono puntualità, discrezione e massima serietà.
+          </div>
+
+          <div className="rounded-xl border border-yellow-500/20 bg-zinc-900/40 p-5">
+            💶 In caso di importi concordati è richiesto presentarsi con la cifra esatta già preparata.
+            <br />
+            🚫 Non vengono gestiti cambi o conteggi sul posto.
+          </div>
+
+          <div className="rounded-xl border border-red-500/30 bg-red-950/20 p-5">
+            ⚠️ Qualsiasi comportamento ritenuto inappropriato, sospetto o non conforme alle presenti condizioni comporterà l'interruzione immediata di ogni rapporto.
+          </div>
 
         </div>
 
-        <div className="mt-16 text-center text-yellow-400">
-          Welcome to Paradise.
+        <div className="mt-12 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 p-6 text-center">
+          <p className="text-lg font-semibold text-yellow-400">
+            🤝 Il rispetto delle regole garantisce un servizio più sicuro,
+            rapido e organizzato per tutti.
+          </p>
+
+          <p className="mt-6 text-xl font-bold tracking-widest text-white">
+            🏝️ ISLAND PREMIER
+          </p>
         </div>
 
       </div>
