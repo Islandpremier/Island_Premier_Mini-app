@@ -16,28 +16,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-4">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-yellow-500/20 bg-black/70 backdrop-blur-xl px-4 py-3 shadow-xl">
-
-        <Link href="/" className="flex items-center gap-3">
-
-          <Image
-            src="/logo.png"
-            alt="Island Premier"
-            width={42}
-            height={42}
-            className="rounded-lg"
-          />
-
-          <div className="leading-tight">
-            <p className="text-sm font-semibold tracking-[0.2em] text-white">
-              ISLAND
-            </p>
-            <p className="text-xs tracking-[0.3em] text-yellow-400">
-              PREMIER
-            </p>
-          </div>
-
-        </Link>
+      <nav className="mx-auto flex max-w-7xl items-center justify-center rounded-2xl border border-yellow-500/20 bg-black/70 backdrop-blur-xl px-4 py-3 shadow-xl">
 
         <div className="flex items-center gap-2">
 
