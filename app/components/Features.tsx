@@ -1,32 +1,41 @@
 "use client";
 
+import Link from "next/link";
 import {
-  Truck,
   Package,
-  ShieldCheck,
-  Headphones,
+  Info,
+  FileText,
+  MessageCircle,
 } from "lucide-react";
 
 const features = [
   {
     icon: Package,
     title: "Catalogo",
-    text: "Prodotti aggiornati in tempo reale con immagini e video.",
+    text: "Esplora il catalogo completo con immagini, video e listini aggiornati.",
+    href: "/catalogo",
+    external: false,
   },
   {
-    icon: Truck,
-    title: "Consegna",
-    text: "Meet Up e Delivery disponibili in base alla tua zona.",
+    icon: Info,
+    title: "Informazioni",
+    text: "Scopri modalità di consegna, verifica, disponibilità e supporto.",
+    href: "/informazioni",
+    external: false,
   },
   {
-    icon: ShieldCheck,
-    title: "Privacy",
-    text: "Ordini gestiti in modo riservato tramite Telegram.",
+    icon: FileText,
+    title: "Regolamento",
+    text: "Consulta il regolamento prima di inoltrare qualsiasi richiesta.",
+    href: "/regolamento",
+    external: false,
   },
   {
-    icon: Headphones,
-    title: "Supporto",
-    text: "Assistenza diretta per qualsiasi richiesta.",
+    icon: MessageCircle,
+    title: "Assistenza",
+    text: "Contattaci direttamente tramite Telegram per qualsiasi informazione.",
+    href: "https://t.me/Sommelier14",
+    external: true,
   },
 ];
 
@@ -36,15 +45,15 @@ export default function Features() {
 
       <div className="mb-14 text-center">
 
-        <h2 className="text-4xl font-bold text-white">
-          Perché scegliere
+        <h2 className="text-4xl font-bold text-red-500">
+          prova
           <span className="text-yellow-500">
             {" "}Island Premier
           </span>
         </h2>
 
-        <p className="mt-4 text-zinc-400">
-          Un catalogo semplice, veloce e ottimizzato anche per Telegram.
+        <p className="mt-4 text-zinc-400 text-lg">
+          Un'esperienza semplice, veloce e ottimizzata per Telegram.
         </p>
 
       </div>
@@ -55,16 +64,11 @@ export default function Features() {
 
           const Icon = item.icon;
 
-          return (
-
-            <div
-              key={index}
-              className="rounded-3xl border border-yellow-500/20 bg-zinc-900 p-8 transition duration-300 hover:-translate-y-2 hover:border-yellow-500"
-            >
-
+          const content = (
+            <>
               <Icon
-                size={34}
-                className="text-yellow-500"
+                size={36}
+                className="text-yellow-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
               />
 
               <h3 className="mt-6 text-xl font-bold text-white">
@@ -74,9 +78,31 @@ export default function Features() {
               <p className="mt-3 text-sm leading-7 text-zinc-400">
                 {item.text}
               </p>
+            </>
+          );
 
-            </div>
+          if (item.external) {
+            return (
+              <a
+                key={index}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-3xl border border-yellow-500/20 bg-zinc-900 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-yellow-500 hover:bg-zinc-800 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)]"
+              >
+                {content}
+              </a>
+            );
+          }
 
+          return (
+            <Link
+              key={index}
+              href={item.href}
+              className="group rounded-3xl border border-yellow-500/20 bg-zinc-900 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-yellow-500 hover:bg-zinc-800 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)]"
+            >
+              {content}
+            </Link>
           );
 
         })}

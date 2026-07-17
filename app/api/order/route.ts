@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     cap,
     province,
     products: cart,
-    total,
+    total, 
     telegram_id: telegramId,
     telegram_username: telegramUsername,
     status: "pending",

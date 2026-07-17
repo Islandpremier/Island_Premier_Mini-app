@@ -59,7 +59,7 @@ export default function Hero() {
         </h1>
 
         <h2 className="mt-2 text-3xl font-light uppercase tracking-[18px] text-yellow-500 md:text-5xl">
-          PREMIER
+          PREMIER ⭐️🏝
         </h2>
 
         <p className="mt-10 max-w-2xl text-lg leading-8 text-zinc-300 md:text-2xl">
