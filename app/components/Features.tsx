@@ -45,10 +45,10 @@ export default function Features() {
 
       <div className="mb-14 text-center">
 
-        <h2 className="text-4xl font-bold text-red-500">
-          prova
+        <h2 className="text-4xl font-bold text-white">
+          Scegli
           <span className="text-yellow-500">
-            {" "}Island Premier
+            {" "}Island Premier ⭐️🏝
           </span>
         </h2>
 

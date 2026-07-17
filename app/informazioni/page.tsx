@@ -1,95 +1,78 @@
+import Link from "next/link";
+
 export default function InformazioniPage() {
   return (
-    <main className="min-h-screen bg-black text-white py-24 px-6">
+    <main className="min-h-screen bg-black text-white px-6 py-20">
+      <div className="mx-auto max-w-4xl">
 
-      <div className="max-w-4xl mx-auto">
+        <Link
+          href="/"
+          className="inline-block mb-8 rounded-xl border border-yellow-500 px-5 py-2 text-yellow-400 transition hover:bg-yellow-500 hover:text-black"
+        >
+          ← Torna alla Home
+        </Link>
 
-        <h1 className="text-5xl font-black text-yellow-500 text-center mb-12">
-          ℹ️ INFORMAZIONI
+        <h1 className="text-4xl font-bold text-yellow-400 mb-10">
+          Informazioni
         </h1>
 
-        <p className="text-zinc-300 text-center text-lg mb-12">
-          Island Premier è una <strong>community privata</strong> basata su
-          discrezione, affidabilità e rispetto reciproco.
-        </p>
-
-        <div className="space-y-10">
+        <div className="space-y-8">
 
           <section>
-
-            <h2 className="text-2xl font-bold text-yellow-500 mb-3">
-              🔒 Verifica
-            </h2>
-
-            <p className="text-zinc-300">
+            <h2 className="text-2xl font-semibold mb-2">Verifica</h2>
+            <p className="text-gray-300">
               L'accesso ai servizi è riservato esclusivamente agli utenti verificati.
             </p>
-
           </section>
 
           <section>
-
-            <h2 className="text-2xl font-bold text-yellow-500 mb-3">
-              🚚 Modalità disponibili
+            <h2 className="text-2xl font-semibold mb-2">
+              Modalità disponibili
             </h2>
 
-            <ul className="list-disc pl-6 space-y-2 text-zinc-300">
-              <li><strong>Delivery Lombardia</strong></li>
-              <li><strong>Meet-Up:</strong> LC • BG • MB</li>
-              <li><strong>Shipping:</strong> In arrivo</li>
+            <ul className="list-disc pl-6 text-gray-300 space-y-2">
+              <li>Delivery in Lombardia.</li>
+              <li>Meet-Up nelle zone LC - BG - MB.</li>
+              <li>Spedizione (in arrivo).</li>
             </ul>
-
           </section>
 
           <section>
-
-            <h2 className="text-2xl font-bold text-yellow-500 mb-3">
-              📍 Disponibilità
+            <h2 className="text-2xl font-semibold mb-2">
+              Come funziona l'ordine
             </h2>
 
-            <p className="text-zinc-300">
-              Le disponibilità possono variare senza preavviso.
+            <p className="text-gray-300">
+              Una volta inviato l'ordine, riceverai una risposta direttamente su
+              <span className="text-yellow-400 font-semibold"> Telegram </span>
+              con conferma, disponibilità e tutte le istruzioni necessarie.
             </p>
-
           </section>
 
           <section>
+            <h2 className="text-2xl font-semibold mb-2">Disponibilità</h2>
 
-            <h2 className="text-2xl font-bold text-yellow-500 mb-3">
-              🤝 Serietà
-            </h2>
-
-            <p className="text-zinc-300">
-              Si richiedono educazione, puntualità, discrezione e rispetto del tempo altrui.
+            <p className="text-gray-300">
+              Alcuni prodotti potrebbero terminare rapidamente. La disponibilità
+              viene sempre confermata prima della conclusione dell'ordine.
             </p>
-
           </section>
 
           <section>
+            <h2 className="text-2xl font-semibold mb-2">Assistenza</h2>
 
-            <h2 className="text-2xl font-bold text-yellow-500 mb-3">
-              💬 Assistenza
-            </h2>
-
-            <p className="text-zinc-300">
-              Per qualsiasi informazione o chiarimento è possibile utilizzare
-              il pulsante <strong>Assistenza</strong> presente nella Home.
+            <p className="text-gray-300">
+              Per qualsiasi domanda puoi contattarci direttamente tramite Telegram.
             </p>
-
           </section>
 
         </div>
 
-        <div className="mt-16 border border-yellow-500/20 rounded-3xl bg-zinc-900 p-8 text-center">
-
-          <p className="text-yellow-500 text-2xl font-bold">
-            🏝️ Welcome to Paradise
-          </p>
-
+        <div className="mt-16 text-center text-yellow-400">
+          Welcome to Paradise.
         </div>
 
       </div>
-
     </main>
   );
 }
