@@ -113,7 +113,7 @@ ${productsText}
 IN ATTESA
 `;
 
-    await sendTelegramOrder(text);
+   await sendTelegramOrder(text, data.id);
 
     return NextResponse.json({
       success: true,

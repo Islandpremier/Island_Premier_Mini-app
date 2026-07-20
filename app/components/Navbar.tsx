@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -16,10 +15,8 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-4">
-      <nav className="mx-auto flex max-w-7xl items-center justify-center rounded-2xl border border-yellow-500/20 bg-black/70 backdrop-blur-xl px-4 py-3 shadow-xl">
-
+      <nav className="mx-auto flex max-w-7xl items-center justify-center rounded-2xl border border-yellow-500/20 bg-black/70 px-4 py-3 shadow-xl backdrop-blur-xl">
         <div className="flex items-center gap-2">
-
           {links.map((link) => (
             <Link
               key={link.href}
@@ -33,9 +30,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-
         </div>
-
       </nav>
     </header>
   );
