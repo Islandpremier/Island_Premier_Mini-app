@@ -162,9 +162,9 @@ reply_markup: approved
         [
           {
             text: "🛍️ Apri Island Premier",
-            web_app: {
-              url: process.env.NEXT_PUBLIC_MINI_APP_URL!,
-            },
+           web_app: {
+  url: "https://island-premier-mini-app.vercel.app",
+},
           },
         ],
       ],
