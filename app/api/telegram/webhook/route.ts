@@ -153,8 +153,23 @@ if (data.startsWith("user_")) {
       body: JSON.stringify({
         chat_id: Number(telegramId),
         text: approved
-          ? "🎉 Il tuo account è stato approvato!\n\nA breve potrai accedere a Island Premier."
-          : "❌ La tua richiesta di accesso non è stata approvata.",
+  ? "🎉 Il tuo account è stato approvato!\n\nBenvenuto su Island Premier."
+  : "❌ La tua richiesta di accesso non è stata approvata.",
+
+reply_markup: approved
+  ? {
+      inline_keyboard: [
+        [
+          {
+            text: "🛍️ Apri Island Premier",
+            web_app: {
+              url: process.env.NEXT_PUBLIC_MINI_APP_URL!,
+            },
+          },
+        ],
+      ],
+    }
+  : undefined,
       }),
     }
   );
