@@ -13,6 +13,9 @@ export async function POST(req: Request) {
   try {
     const update = await req.json();
 
+console.log("======== UPDATE ========");
+console.log(JSON.stringify(update, null, 2));
+
     // =========================
     // GESTIONE /START
     // =========================
@@ -20,7 +23,11 @@ export async function POST(req: Request) {
     const message = update.message;
 
     if (message?.text === "/start") {
-      const telegramId = message.from.id;
+
+  console.log("START ricevuto");
+  console.log(message.from);
+
+  const telegramId = message.from.id;
       const username = message.from.username ?? null;
       const firstName = message.from.first_name ?? null;
       const lastName = message.from.last_name ?? null;
