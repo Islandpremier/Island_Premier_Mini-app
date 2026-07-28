@@ -102,7 +102,19 @@ console.log("Utente trovato:", existingUser);
             }),
           }
         );
-      } else {
+            } else {
+        let text = "";
+
+        if (existingUser.approved) {
+          text = "✅ Il tuo account è già approvato.";
+        } else if (existingUser.rejected) {
+          text =
+            "❌ Il tuo account è stato rifiutato.\n\nContatta l'assistenza se ritieni ci sia un errore.";
+        } else {
+          text =
+            "⏳ Il tuo account è ancora in attesa di approvazione.";
+        }
+
         await fetch(
           `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
           {
@@ -112,9 +124,7 @@ console.log("Utente trovato:", existingUser);
             },
             body: JSON.stringify({
               chat_id: telegramId,
-              text: existingUser.approved
-                ? "✅ Il tuo account è già approvato."
-                : "⏳ Il tuo account è ancora in attesa di approvazione.",
+              text,
             }),
           }
         );
@@ -145,12 +155,13 @@ if (data.startsWith("user_")) {
   const approved = action === "approve";
 
   await supabase
-    .from("users")
-    .update({
-      approved,
-      approved_at: approved ? new Date().toISOString() : null,
-    })
-    .eq("telegram_id", Number(telegramId));
+  .from("users")
+  .update({
+    approved,
+    rejected: !approved,
+    approved_at: approved ? new Date().toISOString() : null,
+  })
+  .eq("telegram_id", Number(telegramId));
 
   await fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
