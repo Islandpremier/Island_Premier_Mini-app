@@ -163,53 +163,55 @@ if (data.startsWith("user_")) {
   })
   .eq("telegram_id", Number(telegramId));
 
-  await fetch(
-    `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: Number(telegramId),
-        text: approved
-  ? "🎉 Il tuo account è stato approvato!\n\nBenvenuto su Island Premier."
-  : "❌ La tua richiesta di accesso non è stata approvata.",
+ await fetch(
+  `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      chat_id: Number(telegramId),
 
-reply_markup: approved
-  ? {
-      inline_keyboard: [
-        [
-          {
-            text: "🛍️ Apri Island Premier",
-            web_app: {
-              url: "https://island-premier-mini-app.vercel.app",
-            },
-          },
-        ],
-        [
-          {
-            text: "📸 Instagram",
-            url: "https://www.instagram.com/island_premier?igsh=YzVsZTBjZmk5dmFm&utm_source=qr",
-          },
-          {
-            text: "💬 Signal",
-            url: "https://signal.me/#eu/AJzMlXYY_LRj1fGJDdcS-HuN0E_1MC_YSM30QhPlLZm_6IL7kzlKMJRbT_xPBY2o",
-          },
-        ],
-        [
-          {
-            text: "🆘 Assistenza",
-            url: "https://t.me/Sommelier14",
-          },
-        ],
-      ],
-    }
-  : undefined,
-      }),
-    }
-  );
+      photo: "https://island-premier-mini-app.vercel.app/logo.jpg",
 
+      caption: approved
+        ? "🎉 Il tuo account è stato approvato!\n\nBenvenuto su Island Premier."
+        : "❌ La tua richiesta di accesso non è stata approvata.",
+
+      reply_markup: approved
+        ? {
+            inline_keyboard: [
+              [
+                {
+                  text: "🛍️ Apri Island Premier",
+                  web_app: {
+                    url: "https://island-premier-mini-app.vercel.app",
+                  },
+                },
+              ],
+              [
+                {
+                  text: "📸 Instagram",
+                  url: "https://www.instagram.com/island_premier?igsh=YzVsZTBjZmk5dmFm&utm_source=qr",
+                },
+                {
+                  text: "💬 Signal",
+                  url: "https://signal.me/#eu/AJzMlXYY_LRj1fGJDdcS-HuN0E_1MC_YSM30QhPlLZm_6IL7kzlKMJRbT_xPBY2o",
+                },
+              ],
+              [
+                {
+                  text: "🆘 Assistenza",
+                  url: "https://t.me/Sommelier14",
+                },
+              ],
+            ],
+          }
+        : undefined,
+    }),
+  }
+);
   await fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`,
     {
