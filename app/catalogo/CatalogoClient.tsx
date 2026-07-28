@@ -52,10 +52,19 @@ export default function CatalogoClient({ products }: Props) {
   const [selectedOptions, setSelectedOptions] =
     useState<Record<number, string>>({});
 const [sending, setSending] = useState(false);
-const telegramUser =
+const webApp =
   typeof window !== "undefined"
-    ? (window as any).Telegram?.WebApp?.initDataUnsafe?.user
+    ? (window as any).Telegram?.WebApp
     : null;
+
+webApp?.ready();
+
+console.log("WEBAPP:", webApp);
+console.log("INIT DATA:", webApp?.initData);
+console.log("INIT DATA UNSAFE:", webApp?.initDataUnsafe);
+console.log("USER:", webApp?.initDataUnsafe?.user);
+
+const telegramUser = webApp?.initDataUnsafe?.user ?? null;
 const [search, setSearch] = useState("");
 const [category, setCategory] = useState("");
 const [drawerOpen, setDrawerOpen] = useState(false);
