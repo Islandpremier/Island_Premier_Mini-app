@@ -182,9 +182,25 @@ reply_markup: approved
         [
           {
             text: "🛍️ Apri Island Premier",
-           web_app: {
-  url: "https://island-premier-mini-app.vercel.app",
-},
+            web_app: {
+              url: "https://island-premier-mini-app.vercel.app",
+            },
+          },
+        ],
+        [
+          {
+            text: "📸 Instagram",
+            url: "https://www.instagram.com/island_premier?igsh=YzVsZTBjZmk5dmFm&utm_source=qr",
+          },
+          {
+            text: "💬 Signal",
+            url: "https://signal.me/#eu/AJzMlXYY_LRj1fGJDdcS-HuN0E_1MC_YSM30QhPlLZm_6IL7kzlKMJRbT_xPBY2o",
+          },
+        ],
+        [
+          {
+            text: "🆘 Assistenza",
+            url: "https://t.me/Sommelier14",
           },
         ],
       ],
