@@ -173,7 +173,7 @@ if (data.startsWith("user_")) {
     body: JSON.stringify({
       chat_id: Number(telegramId),
 
-      photo: "https://island-premier-mini-app.vercel.app/logo.jpg",
+      photo: "https://island-premier-mini-app.vercel.app/Logo.png",
 
       caption: approved
         ? "🎉 Il tuo account è stato approvato!\n\nBenvenuto su Island Premier."
