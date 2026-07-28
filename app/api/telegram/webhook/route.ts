@@ -37,6 +37,8 @@ console.log(JSON.stringify(update, null, 2));
         .select("*")
         .eq("telegram_id", telegramId)
         .maybeSingle();
+        console.log("Telegram ID:", telegramId);
+console.log("Utente trovato:", existingUser);
 
       if (!existingUser) {
         await supabase.from("users").insert({
