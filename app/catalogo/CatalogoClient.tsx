@@ -51,19 +51,27 @@ export default function CatalogoClient({ products }: Props) {
   const [selectedOptions, setSelectedOptions] =
     useState<Record<number, string>>({});
 const [sending, setSending] = useState(false);
-const webApp =
-  typeof window !== "undefined"
-    ? (window as any).Telegram?.WebApp
-    : null;
+const [telegramUser, setTelegramUser] = useState<any>(null);
 
-webApp?.ready();
+useEffect(() => {
+  const webApp = (window as any).Telegram?.WebApp;
 
-console.log("WEBAPP:", webApp);
-console.log("INIT DATA:", webApp?.initData);
-console.log("INIT DATA UNSAFE:", webApp?.initDataUnsafe);
-console.log("USER:", webApp?.initDataUnsafe?.user);
+  if (!webApp) {
+    console.log("❌ Telegram WebApp non trovato");
+    return;
+  }
 
-const telegramUser = webApp?.initDataUnsafe?.user ?? null;
+  webApp.ready();
+
+  console.log("WEBAPP:", webApp);
+  console.log("VERSION:", webApp.version);
+  console.log("PLATFORM:", webApp.platform);
+  console.log("INIT DATA:", webApp.initData);
+  console.log("INIT DATA UNSAFE:", webApp.initDataUnsafe);
+  console.log("USER:", webApp.initDataUnsafe?.user);
+
+  setTelegramUser(webApp.initDataUnsafe?.user ?? null);
+}, []);
 const [search, setSearch] = useState("");
 const [category, setCategory] = useState("");
 const [drawerOpen, setDrawerOpen] = useState(false);
