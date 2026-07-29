@@ -40,3 +40,29 @@ export async function sendTelegramOrder(
 
   return result;
 }
+
+export async function sendTelegramMessage(
+  chatId: number | string,
+  text: string
+) {
+  const response = await fetch(
+    `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "HTML",
+      }),
+    }
+  );
+
+  const result = await response.json();
+
+  console.log("Telegram cliente:", result);
+
+  return result;
+}

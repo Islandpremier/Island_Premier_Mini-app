@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { sendTelegramOrder } from "../telegram/send";
+import {
+  sendTelegramOrder,
+  sendTelegramMessage,
+} from "../telegram/send";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -114,6 +117,23 @@ IN ATTESA
 `;
 
    await sendTelegramOrder(text, data.id);
+   if (telegramId) {
+  const customerMessage = `
+🛒 <b>Ordine ricevuto!</b>
+
+Abbiamo ricevuto correttamente il tuo ordine.
+
+Il nostro staff lo verificherà il prima possibile.
+
+Riceverai un nuovo messaggio quando l'ordine verrà approvato o rifiutato.
+
+Grazie per aver scelto <b>Island Premier</b>.`;
+  
+  await sendTelegramMessage(
+    telegramId,
+    customerMessage
+  );
+}
 
     return NextResponse.json({
       success: true,

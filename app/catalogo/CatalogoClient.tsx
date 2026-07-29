@@ -38,7 +38,6 @@ export default function CatalogoClient({ products }: Props) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [slots, setSlots] = useState<TimeSlot[]>([]);
 
-  const [customerName, setCustomerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [city, setCity] = useState("");
   const [shippingMethod, setShippingMethod] =
@@ -217,7 +216,6 @@ const availableSlots = useMemo(() => {
     return `
 Nuovo Ordine 
 
-Nome: ${customerName}
 
 Telefono: ${phoneNumber}
 
@@ -239,10 +237,10 @@ Totale: €${total}
     return;
   }
 
-  if (!customerName || !phoneNumber || !city) {
-    alert("Compila tutti i campi obbligatori.");
-    return;
-  }
+ if (!phoneNumber || !city) {
+  alert("Compila tutti i campi obbligatori.");
+  return;
+}
 
   if (!selectedSlot) {
     alert("Seleziona una fascia oraria.");
@@ -258,7 +256,7 @@ Totale: €${total}
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        customerName,
+
         phoneNumber,
         city,
         shippingMethod,
@@ -282,7 +280,6 @@ Totale: €${total}
     alert("Ordine inviato con successo!");
 
     setCart([]);
-    setCustomerName("");
     setPhoneNumber("");
     setCity("");
     setStreet("");
@@ -395,29 +392,20 @@ Totale: €${total}
                 </div>
 
                 <div className="mt-6 space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Nome e cognome"
-                    value={customerName}
-                    onChange={(e) =>
-                      setCustomerName(
-                        e.target.value
-                      )
-                    }
-                    className="w-full p-3 rounded-lg bg-black border border-yellow-500"
-                  />
 
-                  <input
-                    type="text"
-                    placeholder="Numero telefono"
-                    value={phoneNumber}
-                    onChange={(e) =>
-                      setPhoneNumber(
-                        e.target.value
-                      )
-                    }
-                    className="w-full p-3 rounded-lg bg-black border border-yellow-500"
-                  />
+                 <input
+  type="tel"
+  inputMode="numeric"
+  maxLength={10}
+  placeholder="Numero telefono"
+  value={phoneNumber}
+  onChange={(e) =>
+    setPhoneNumber(
+      e.target.value.replace(/\D/g, "").slice(0, 10)
+    )
+  }
+  className="w-full p-3 rounded-lg bg-black border border-yellow-500"
+/>
 
                   <input
                     type="text"
@@ -625,21 +613,19 @@ Totale: €${total}
 
      <div className="mt-6 space-y-4">
 
-  <input
-    type="text"
-    placeholder="Nome e cognome"
-    value={customerName}
-    onChange={(e) => setCustomerName(e.target.value)}
-    className="w-full rounded-xl border border-yellow-500 bg-black p-3"
-  />
-
-  <input
-    type="text"
-    placeholder="Numero di telefono"
-    value={phoneNumber}
-    onChange={(e) => setPhoneNumber(e.target.value)}
-    className="w-full rounded-xl border border-yellow-500 bg-black p-3"
-  />
+ <input
+  type="tel"
+  inputMode="numeric"
+  maxLength={10}
+  placeholder="Numero di telefono"
+  value={phoneNumber}
+  onChange={(e) =>
+    setPhoneNumber(
+      e.target.value.replace(/\D/g, "").slice(0, 10)
+    )
+  }
+  className="w-full rounded-xl border border-yellow-500 bg-black p-3"
+/>
 
   <input
     type="text"
