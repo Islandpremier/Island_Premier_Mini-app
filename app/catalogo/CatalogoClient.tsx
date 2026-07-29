@@ -250,11 +250,10 @@ Totale: €${total}
   try {
     setSending(true);
 
-console.log("=== INVIO ORDINE ===");
-console.log("telegramUser:", telegramUser);
-console.log("telegramId:", telegramUser?.id);
-console.log("telegramUsername:", telegramUser?.username);
-    const response = await fetch("/api/order", {
+console.log("=== INVIO ORDINE ===");alert(
+  "Telegram ID: " + telegramUser?.id +
+  "\nUsername: " + telegramUser?.username
+);   const response = await fetch("/api/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
