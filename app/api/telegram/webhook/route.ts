@@ -105,9 +105,53 @@ console.log("Utente trovato:", existingUser);
             } else {
         let text = "";
 
-        if (existingUser.approved) {
-          text = "✅ Il tuo account è già approvato.";
-        } else if (existingUser.rejected) {
+       if (existingUser.approved) {
+  await fetch(
+    `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: telegramId,
+        photo: "https://island-premier-mini-app.vercel.app/Logo.png",
+        caption:
+          "👋 Bentornato su Island Premier.\n\nIl tuo account è già approvato. Puoi accedere al catalogo in qualsiasi momento.",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "🛍️ Apri Island Premier",
+                web_app: {
+                  url: "https://island-premier-mini-app.vercel.app",
+                },
+              },
+            ],
+            [
+              {
+                text: "📸 Instagram",
+                url: "https://www.instagram.com/island_premier?igsh=YzVsZTBjZmk5dmFm&utm_source=qr",
+              },
+              {
+                text: "💬 Signal",
+                url: "https://signal.me/#eu/AJzMlXYY_LRj1fGJDdcS-HuN0E_1MC_YSM30QhPlLZm_6IL7kzlKMJRbT_xPBY2o",
+              },
+            ],
+            [
+              {
+                text: "🆘 Assistenza",
+                url: "https://t.me/Sommelier14",
+              },
+            ],
+          ],
+        },
+      }),
+    }
+  );
+
+  return NextResponse.json({ ok: true });
+} else if (existingUser.rejected) {
           text =
             "❌ Il tuo account è stato rifiutato.\n\nContatta l'assistenza se ritieni ci sia un errore.";
         } else {
