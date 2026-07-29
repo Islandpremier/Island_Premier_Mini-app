@@ -256,11 +256,42 @@ const status =
     ? "approved"
     : "rejected";
 
-await supabase
+const { data: order } = await supabase
   .from("orders")
   .update({ status })
-  .eq("id", Number(orderId));
+  .eq("id", Number(orderId))
+  .select("telegram_id")
+  .single();
 
+  if (order?.telegram_id) {
+  await fetch(
+    `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: order.telegram_id,
+        parse_mode: "HTML",
+        text:
+          status === "approved"
+            ? `✅ <b>Ordine approvato!</b>
+
+Il tuo ordine è stato approvato con successo.
+
+Il nostro staff ti contatterà a breve per organizzare tutto.
+
+Grazie per aver scelto <b>Island Premier</b>.`
+            : `❌ <b>Ordine rifiutato</b>
+
+Il tuo ordine non è stato approvato.
+
+Per maggiori informazioni contatta l'assistenza.`,
+      }),
+    }
+  );
+}
     await fetch(
       `https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`,
       {
