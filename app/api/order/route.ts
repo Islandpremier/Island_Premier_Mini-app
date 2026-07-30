@@ -80,7 +80,10 @@ ${item.option}
 ━━━━━━━━━━━━━━━━━━
 
 👤 <b>Cliente</b>
-${customerName}
+${telegramUsername ? `@${telegramUsername}` : "Username non disponibile"}
+
+🆔 <b>Telegram ID</b>
+<code>${telegramId}</code>
 
 📞 <b>Telefono</b>
 ${phoneNumber}
