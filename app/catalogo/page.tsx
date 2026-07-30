@@ -1,6 +1,8 @@
 import { supabase } from "@/lib/supabase";
 import CatalogoClient from "./CatalogoClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function CatalogoPage() {
   const { data: products, error } = await supabase
     .from("products")
