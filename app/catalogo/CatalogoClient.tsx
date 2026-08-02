@@ -44,6 +44,7 @@ export default function CatalogoClient({ products }: Props) {
     useState("Meet up");
 
   const [selectedSlot, setSelectedSlot] = useState("");
+  const [deliveryDate, setDeliveryDate] = useState("");
   const [street, setStreet] = useState("");
   const [cap, setCap] = useState("");
   const [province, setProvince] = useState("");
@@ -246,6 +247,10 @@ Totale: €${total}
   }
 
  if (!phoneNumber || !city) {
+  if (!deliveryDate) {
+  alert("Seleziona una data.");
+  return;
+}
   alert("Compila tutti i campi obbligatori.");
   return;
 }
@@ -271,6 +276,7 @@ console.log("=== INVIO ORDINE ===");alert(
         phoneNumber,
         city,
         shippingMethod,
+        deliveryDate,
         selectedSlot,
         street,
         cap,
@@ -689,7 +695,13 @@ console.log("=== INVIO ORDINE ===");alert(
     Per il Delivery è richiesto un ordine minimo di 200€.
   </div>
 )}
-
+<input
+  type="date"
+  value={deliveryDate}
+  min={new Date().toISOString().split("T")[0]}
+  onChange={(e) => setDeliveryDate(e.target.value)}
+  className="w-full rounded-xl border border-yellow-500 bg-black p-3"
+/>
 <select
   value={selectedSlot}
   onChange={(e) => setSelectedSlot(e.target.value)}

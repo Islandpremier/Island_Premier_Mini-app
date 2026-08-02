@@ -19,6 +19,7 @@ export async function POST(req: Request) {
   phoneNumber,
   city,
   shippingMethod,
+  deliveryDate,
   selectedSlot,
   street,
   cap,
@@ -36,6 +37,7 @@ export async function POST(req: Request) {
     phone_number: phoneNumber,
     city,
     shipping_method: shippingMethod,
+    delivery_date: deliveryDate,
     preferred_time_slot: selectedSlot,
     street,
     cap,
@@ -93,6 +95,9 @@ ${city}
 
 🚚 <b>Metodo</b>
 ${shippingMethod}
+
+📅 <b>Data</b>
+${deliveryDate}
 
 🕒 <b>Fascia oraria</b>
 ${selectedSlot}

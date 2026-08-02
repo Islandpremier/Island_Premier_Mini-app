@@ -304,7 +304,7 @@ const { data: order } = await supabase
   .from("orders")
   .update({ status })
   .eq("id", Number(orderId))
-  .select("telegram_id")
+  .select("telegram_id, delivery_date, preferred_time_slot")
   .single();
 
   if (order?.telegram_id) {
@@ -319,12 +319,16 @@ const { data: order } = await supabase
         chat_id: order.telegram_id,
         parse_mode: "HTML",
         text:
-          status === "approved"
-            ? `✅ <b>Ordine approvato!</b>
+  status === "approved"
+    ? `✅ <b>Ordine approvato!</b>
 
 Il tuo ordine è stato approvato con successo.
 
-Il nostro staff ti contatterà a breve per organizzare tutto.
+📅 Data: ${order.delivery_date}
+
+🕒 Fascia oraria: ${order.preferred_time_slot}
+
+Per definire gli ultimi dettagli contatta direttamente l'assistenza.
 
 Grazie per aver scelto <b>Island Premier</b>.`
             : `❌ <b>Ordine rifiutato</b>
