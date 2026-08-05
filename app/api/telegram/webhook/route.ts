@@ -256,22 +256,52 @@ if (data.startsWith("user_")) {
     }),
   }
 );
+const { data: user } = await supabase
+  .from("users")
+  .select("*")
+  .eq("telegram_id", Number(telegramId))
+  .single();
   await fetch(
-    `https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: callback.message.chat.id,
-        message_id: callback.message.message_id,
-        text: approved
-          ? "🟢 UTENTE APPROVATO"
-          : "🔴 UTENTE RIFIUTATO",
-      }),
-    }
-  );
+  `https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      chat_id: callback.message.chat.id,
+      message_id: callback.message.message_id,
+      parse_mode: "HTML",
+      text: approved
+        ? `🟢 <b>UTENTE APPROVATO</b>
+
+👤 <b>${user.first_name ?? ""} ${user.last_name ?? ""}</b>
+
+📱 @${user.telegram_username ?? "-"}
+
+🆔 <code>${telegramId}</code>
+
+━━━━━━━━━━━━━━━━━━
+
+✅ <b>STATO</b>
+
+APPROVATO`
+        : `🔴 <b>UTENTE RIFIUTATO</b>
+
+👤 <b>${user.first_name ?? ""} ${user.last_name ?? ""}</b>
+
+📱 @${user.telegram_username ?? "-"}
+
+🆔 <code>${telegramId}</code>
+
+━━━━━━━━━━━━━━━━━━
+
+❌ <b>STATO</b>
+
+RIFIUTATO`,
+    }),
+  }
+);
 
   await fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`,
@@ -304,7 +334,7 @@ const { data: order } = await supabase
   .from("orders")
   .update({ status })
   .eq("id", Number(orderId))
-  .select("telegram_id, delivery_date, preferred_time_slot")
+  .select("*")
   .single();
 
   if (order?.telegram_id) {
@@ -340,23 +370,87 @@ Per maggiori informazioni contatta l'assistenza.`,
     }
   );
 }
-    await fetch(
-      `https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: callback.message.chat.id,
-          message_id: callback.message.message_id,
-          text:
-            status === "approved"
-              ? "🟢 ORDINE APPROVATO"
-              : "🔴 ORDINE RIFIUTATO",
-        }),
-      }
-    );
+    const productsText = order.products
+  .map(
+    (item: any) =>
+      `• <b>${item.product.name}</b>\n${item.option}\n€${item.price}`
+  )
+  .join("\n\n");
+
+await fetch(
+  `https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      chat_id: callback.message.chat.id,
+      message_id: callback.message.message_id,
+      parse_mode: "HTML",
+      text:
+        status === "approved"
+          ? `🟢 <b>ORDINE APPROVATO #${order.id}</b>
+
+━━━━━━━━━━━━━━━━━━
+
+👤 <b>Cliente</b>
+${order.telegram_username ? `@${order.telegram_username}` : "-"}
+
+🆔 <code>${order.telegram_id}</code>
+
+📞 ${order.phone_number}
+
+📍 ${order.city}
+
+🚚 ${order.shipping_method}
+
+📅 ${order.delivery_date}
+
+🕒 ${order.preferred_time_slot}
+
+━━━━━━━━━━━━━━━━━━
+
+📦 <b>PRODOTTI</b>
+
+${productsText}
+
+━━━━━━━━━━━━━━━━━━
+
+💰 <b>TOTALE</b>
+
+€${order.total}
+
+━━━━━━━━━━━━━━━━━━
+
+✅ <b>STATO</b>
+
+APPROVATO`
+          : `🔴 <b>ORDINE RIFIUTATO #${order.id}</b>
+
+━━━━━━━━━━━━━━━━━━
+
+👤 <b>Cliente</b>
+${order.telegram_username ? `@${order.telegram_username}` : "-"}
+
+🆔 <code>${order.telegram_id}</code>
+
+📞 ${order.phone_number}
+
+📍 ${order.city}
+
+📦 <b>PRODOTTI</b>
+
+${productsText}
+
+━━━━━━━━━━━━━━━━━━
+
+❌ <b>STATO</b>
+
+RIFIUTATO`,
+    }),
+  }
+);
 
     await fetch(
       `https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`,
